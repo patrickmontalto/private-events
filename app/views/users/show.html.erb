@@ -1,8 +1,15 @@
 <h2>User</h2>
 <h3>View</h3>
 <p>	
-	<strong>Name:</strong><%= @user.first_name %> <%= @user.last_name %>
+	<strong>Name:</strong><%= @user.full_name %>
 </p>
 <p>
 	<strong>Email:</strong><%= @user.email %>
 </p>
+
+<h3>Hosted Events:</h3>
+<ul>
+	<% @user.events.each do |event| %>
+		<li><%= event.title %> at <%= event.location %>.</li>
+	<% end %>
+</ul>

@@ -14,6 +14,7 @@ module SessionsHelper
 	end
 
 	def current_user
+    session[:current_user_id] = nil if User.all.size == 0
 	  session[:current_user_id].nil? ? nil : User.find(session[:current_user_id])
 	end
 
