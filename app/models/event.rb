@@ -1,4 +1,5 @@
 class Event < ActiveRecord::Base
+  after_create :assign_creator_to_attendees
   belongs_to :creator, :class_name => "User"
   has_many :invitations, :class_name => "EventInvitation"
   has_many :invitees, :through => :invitations
@@ -19,5 +20,11 @@ class Event < ActiveRecord::Base
   def Event.upcoming
     Event.where('datetime > ?', Time.now)
   end
+
+  private
+
+    def assign_creator_to_attendees
+      self.invitations.build(inviter_id: self.creator.id, invitee_id: self.creator.id, attending: true).save
+    end
 
 end

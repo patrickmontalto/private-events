@@ -21,3 +21,4 @@ Event.create!(title: "Turkey Day",
               location: "Our House",
               datetime: "2015-11-26 18:00:00",
               creator_id: 3)
+

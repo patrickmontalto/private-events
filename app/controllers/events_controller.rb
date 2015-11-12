@@ -12,7 +12,7 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = current_user.events.build(event_params)
+    @event = current_user.hosted_events.build(event_params)
     if @event.save
       flash[:success] = "Event created!"
       redirect_to events_path
