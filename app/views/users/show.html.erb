@@ -1,5 +1,4 @@
 <h2>User</h2>
-<h3>View</h3>
 <p>	
 	<strong>Name:</strong><%= @user.full_name %>
 </p>
@@ -9,7 +8,7 @@
 
 <h3>Hosted Events:</h3>
 <ul>
-	<% @user.events.each do |event| %>
+	<% @user.hosted_events.each do |event| %>
 		<li><%= event.title %> at <%= event.location %>.</li>
 	<% end %>
 </ul>

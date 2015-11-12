@@ -2,9 +2,9 @@
 <ul>
 	<% @events.each do |event| %>
 		<li>
-			<strong>Title:</strong> <%= event.title %><br/>
+			<strong>Title:</strong> <%= link_to event.title, event %><br/>
 			<strong>Location:</strong> <%= event.location %><br/>
-			<strong>Creator:</strong>  <%= event.creator.full_name %>
-		</li>
+			<strong>Creator:</strong>  <%= link_to event.creator.full_name, event.creator if event.creator %>
+		</li><br/>
 	<% end %>
 </ul>

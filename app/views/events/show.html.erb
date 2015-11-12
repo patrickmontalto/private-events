@@ -1,3 +1,28 @@
-<h2>Event</h2>
+<h1>Event Page</h1>
 <strong>Title:</strong> <%= @event.title %> <br/>
-<strong>Creator:</strong> <%= @event.creator.full_name %>
+<strong>Creator:</strong> <%= @event.creator.full_name if @event.creator %><br />
+<strong>Time and Date:</strong> <%= @event.datetime %><br/><br/>
+
+<strong>Pending:</strong> 
+<ul>
+	<% @event.pending_invitees.each do |pending_invitee| %>
+		<li><%= link_to pending_invitee.full_name, pending_invitee %></li>
+	<% end %>
+</ul><br/>
+
+<strong>Attending:</strong> 
+<ul>
+	<% @event.attendees.each do |attendee| %>
+		<li><%= link_to attendee.full_name, attendee %></li>
+	<% end %>
+</ul><br/>
+
+<strong>Declined:</strong> 
+<ul>
+	<% @event.absentees.each do |absentee| %>
+		<li><%= link_to absentee.full_name, absentee %></li>
+	<% end %>
+</ul><br/>
+
+<%= link_to "Send Invite", new_invitation_path %>
+

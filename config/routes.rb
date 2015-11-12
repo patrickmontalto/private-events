@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   delete 'logout'  => 'sessions#destroy'
   resources :users
   resources :events
+  get    '/events/:id/invitation', to: 'event_invitations#new', as: 'new_invitation'
+  post   'event_invitations' => 'event_invitations#create'
 end
