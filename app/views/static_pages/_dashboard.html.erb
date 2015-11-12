@@ -1,0 +1,17 @@
+<div class="center jumbotron">
+  <h1>Event Dashboard</h1>
+  <h2>
+  	Total Events: <%= current_user.attended_events.count %><br>
+    Upcoming Events: <%= current_user.upcoming_events.count %><br>
+    Pending Events: <%= current_user.pending_events.count %><br>
+  </h2>
+	<%= link_to "Create an event!", new_event_path, class: "btn btn-lg btn-primary" %>
+</div>
+<div class="row">
+	<div class="col-md-6">
+	<strong>Upcoming Events</strong>
+	</div>
+	<div class="col-md-6">
+	<strong>Past Events</strong>
+	</div>
+</div>

@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   has_many :attended_events, -> { where event_invitations: {attending: true}},
                             :through => :received_invitations,
                             :source => 'event'
+  has_many :pending_events, -> { where event_invitations: {attending: nil}},
+                            :through => :received_invitations,
+                            :source => 'event'
 
   def full_name
       "#{self.first_name} #{self.last_name}"
