@@ -21,14 +21,14 @@ class EventInvitationsController < ApplicationController
         flash[:success] = "Invitation sent to #{@invitee.email}!"
         redirect_to events_path
       else
-        flash.now[:danger] = "Error sending invitation"
-        render 'new_invitation_path'
+        flash[:danger] = "Error sending invitation. The user may have already been invited or you are not the host."
+        event_id = params[:event_invitation][:event_id]
+        redirect_to new_invitation_path(event_id)
       end
     else
       flash[:danger] = "Invitee email not found."
-      @event = Event.find_by(params[:event_id])
-      @invitation = EventInvitation.new(:event_id => params[:id])
-      redirect_to new_invitation_path(@event.id)
+      event_id = params[:event_invitation][:event_id]
+      redirect_to new_invitation_path(event_id)
     end
 
   end

@@ -8,10 +8,28 @@
 	<%= link_to "Create an event!", new_event_path, class: "btn btn-lg btn-primary" %>
 </div>
 <div class="row">
-	<div class="col-md-6">
+	<div class="col-sm-6">
 	<strong>Upcoming Events</strong>
+		<% if current_user.upcoming_events.any? %>
+			<ul>
+				<% current_user.upcoming_events.each do |event| %>
+					<li><%= link_to "#{event.title} - #{event.datetime.strftime('%m/%d/%Y')}", event %></li>
+				<% end %>
+			</ul>
+		<% else %>
+			<p>No upcoming events!</p>
+		<% end %>
 	</div>
-	<div class="col-md-6">
+	<div class="col-sm-6">
 	<strong>Past Events</strong>
+		<% if current_user.previous_events.any? %>
+			<ul>
+				<% current_user.previous_events.each do |event| %>
+					<li><%= link_to event.title, event %></li>
+				<% end %>
+			</ul>
+		<% else %>
+			<p>You have no past events.</p>
+		<% end %>
 	</div>
 </div>

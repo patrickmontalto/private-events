@@ -1,15 +1,22 @@
 <h2>New Invitation</h2>
 <h3>Create Invitation for Event: <%= @event.title %></h3>
-
-<%= form_for @invitation do |f| %>
+<% if @event.creator == current_user %>
+	<%= form_for @invitation do |f| %>
+		<p>
+			<%= f.label :invitee, "Invitee Email:" %>
+			<%= f.text_field :invitee %>
+		</p>
+		<p>
+			<%= f.hidden_field :event_id %>
+		</p>
+		<p>
+			<%= f.submit 'Send Invite' %>
+		</p>
+	<% end %>
+<% else %>
 	<p>
-		<%= f.label :invitee, "Invitee Email:" %>
-		<%= f.text_field :invitee %>
-	</p>
-	<p>
-		<%= f.hidden_field :event_id %>
-	</p>
-	<p>
-		<%= f.submit 'Send Invite' %>
+		<strong>
+			You are not authorized to invite people to this event. Only the host can invite users.
+		</strong>
 	</p>
 <% end %>
