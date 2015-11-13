@@ -1,0 +1,22 @@
+<h2>New Invitation</h2>
+<h3>Add Admin for <%= @event.title %></h3>
+<% if @event.admin_or_creator?(current_user)%>
+	<%= form_for @event_management do |f| %>
+		<p>
+			<%= f.label :admin, "Admin Email:" %>
+			<%= f.text_field :admin %>
+		</p>
+		<p>
+			<%= f.hidden_field :event_id %>
+		</p>
+		<p>
+			<%= f.submit 'Add Admin' %>
+		</p>
+	<% end %>
+<% else %>
+	<p>
+		<strong>
+			You are not authorized to invite people to this event. Only admins or the host can appoint admins.
+		</strong>
+	</p>
+<% end %>

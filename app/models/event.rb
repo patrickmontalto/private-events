@@ -12,6 +12,8 @@ class Event < ActiveRecord::Base
   has_many :absentees, -> { where event_invitations: {attending: false} },
                           :through => :invitations,
                           source: :invitee
+  has_many :managements, :class_name => "EventManagement"
+  has_many :admins, :through => :managements
 
   def Event.past
     Event.where('datetime < ?', Time.now)
@@ -19,6 +21,10 @@ class Event < ActiveRecord::Base
 
   def Event.upcoming
     Event.where('datetime > ?', Time.now)
+  end
+
+  def admin_or_creator?(user)
+    self.admins.include?(user) || self.creator == user ? true : false
   end
 
   private

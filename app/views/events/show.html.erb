@@ -1,7 +1,14 @@
 <h1>Event Page</h1>
 <strong>Title:</strong> <%= @event.title %> <br/>
-<strong>Creator:</strong> <%= @event.creator.full_name if @event.creator %><br />
+<strong>Created By:</strong> <%= link_to @event.creator.full_name, @event.creator if @event.creator %><br />
 <strong>Time and Date:</strong> <%= @event.datetime %><br/><br/>
+<strong>Admins:</strong>
+<ul>
+	<% @event.admins.each do |admin| %>
+		<li><%= link_to admin.full_name, admin %></li>
+	<% end %>
+</ul>
+
 
 <strong>Pending:</strong> 
 <ul>
@@ -24,5 +31,7 @@
 	<% end %>
 </ul><br/>
 
-<%= link_to "Send Invite", new_invitation_path %>
+<%= link_to "Send Invite", new_invitation_path %><br>
+
+<%= link_to "Add admins", new_admin_path if @event.admin_or_creator?(current_user) %>
 

@@ -1,7 +1,12 @@
 class EventInvitationsController < ApplicationController
   def index
-    @sent_invitations = User.sent_invitations
-    @received_invitations = User.received_invitations
+    if current_user.nil?
+      @sent_invitations = []
+      @received_invitations = []
+    else
+      @sent_invitations = current_user.sent_invitations
+      @received_invitations = current_user.received_invitations
+    end
   end
 
   def show
@@ -30,7 +35,18 @@ class EventInvitationsController < ApplicationController
       event_id = params[:event_invitation][:event_id]
       redirect_to new_invitation_path(event_id)
     end
+  end
 
+  def accept
+    @invite = EventInvitation.find(params[:id])
+    @invite.update_attributes(attending: true)
+    redirect_to invites_path
+  end
+
+  def decline
+    @invite = EventInvitation.find(params[:id])
+    @invite.update_attributes(attending: false)
+    redirect_to invites_path
   end
 
   private

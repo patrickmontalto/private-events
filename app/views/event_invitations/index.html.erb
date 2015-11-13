@@ -1,0 +1,42 @@
+<h2>Invites</h2>
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#inbox">Inbox</a></li>
+  <li><a data-toggle="tab" href="#sent">Sent</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="inbox" class="tab-pane fade in active">
+    <h3>Inbox</h3>
+    <table class="table table-striped">
+    	<thead>
+    		<tr>
+    			<th>From</th>
+    			<th>Event</th>
+    			<th>Host</th>
+    			<th>Date & Time</th>
+    			<th>Status</th>
+    			<th>Actions</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<% @received_invitations.each do |rec_invite| %>
+    		<tr>
+    			<td><%= link_to rec_invite.inviter.full_name, rec_invite.inviter %></td>
+    			<td><%= link_to rec_invite.event.title, rec_invite.event %></td>
+    			<td><%= link_to rec_invite.event.creator.full_name, rec_invite.event.creator %></td>
+    			<td><%= rec_invite.event.datetime.localtime.strftime('%m/%d/%Y, %l:%M %p') %></td>
+    			<td><%= rec_invite.status %>
+    			<td><%= link_to "Accept", accept_invite_path(rec_invite), method: :put %> | 
+  						<%= link_to "Decline", decline_invite_path(rec_invite), method: :put %> </td>
+    		</tr>
+    		<% end %>
+    	</tbody>
+    </table>
+    
+  </div>
+  <div id="sent" class="tab-pane fade">
+    <h3>Sent</h3>
+    
+  </div>
+
+</div>
