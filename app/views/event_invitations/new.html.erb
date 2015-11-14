@@ -1,6 +1,6 @@
 <h2>New Invitation</h2>
 <h3>Create Invitation for Event: <%= @event.title %></h3>
-<% if @event.creator == current_user %>
+<% if @event.admin_or_creator?(current_user) %>
 	<%= form_for @invitation do |f| %>
 		<p>
 			<%= f.label :invitee, "Invitee Email:" %>

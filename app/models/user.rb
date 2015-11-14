@@ -17,11 +17,11 @@ class User < ActiveRecord::Base
   end
 
   def upcoming_events
-    self.attended_events.where('datetime < ?', Time.now)
+    self.attended_events.where('datetime > ?', Time.now)
   end
 
   def previous_events
-    self.attended_events.where('datetime > ?', Time.now)
+    self.attended_events.where('datetime < ?', Time.now)
   end
 
   def received_invites

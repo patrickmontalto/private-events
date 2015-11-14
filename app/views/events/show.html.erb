@@ -31,7 +31,7 @@
 	<% end %>
 </ul><br/>
 
-<%= link_to "Send Invite", new_invitation_path %><br>
+<%= link_to "Send Invite", new_invitation_path if @event.admin_or_creator?(current_user) %><br>
 
 <%= link_to "Add admins", new_admin_path if @event.admin_or_creator?(current_user) %>
 
