@@ -1,17 +1,15 @@
 <div class="center jumbotron">
   <h1>Event Dashboard</h1>
   <h2>
-  	Total Events: <%= current_user.attended_events.count + 
-  										current_user.hosted_events.count %><br>
-    Upcoming Events: <%= current_user.upcoming_events.count +
-    										current_user.hosted_events.where('datetime > ?', Time.now).count %>
+  	Total Events: <%= current_user.attended_events.count  %><br>
+    Upcoming Events: <%= current_user.upcoming_events.count %>
     										<br>
     Pending Events: <%= current_user.pending_events.count %><br>
   </h2>
 	<%= link_to "Create an event!", new_event_path, class: "btn btn-lg btn-primary" %>
 </div>
 <div class="row">
-	<div class="col-sm-6">
+	<div class="col-xs-6">
 	<strong>Upcoming Events</strong>
 		<% if current_user.upcoming_events.any? %>
 			<ul>
@@ -23,12 +21,12 @@
 			<p>No upcoming events!</p>
 		<% end %>
 	</div>
-	<div class="col-sm-6">
+	<div class="col-xs-6">
 	<strong>Past Events</strong>
 		<% if current_user.previous_events.any? %>
 			<ul>
 				<% current_user.previous_events.each do |event| %>
-					<li><%= link_to event.title, event %></li>
+					<li><%= link_to "#{event.title} - #{event.datetime.strftime('%m/%d/%Y')}", event %></li>
 				<% end %>
 			</ul>
 		<% else %>

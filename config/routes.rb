@@ -18,4 +18,5 @@ Rails.application.routes.draw do
 
   put    '/invites/:id/accept', to: 'event_invitations#accept', as: 'accept_invite'
   put    '/invites/:id/decline', to: 'event_invitations#decline', as: 'decline_invite'
+  get    '/invites/:id',         to: 'event_invitations#show', as: 'event_invitation'
 end

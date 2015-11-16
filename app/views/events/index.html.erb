@@ -1,23 +1,67 @@
-<h2>All Events</h2>
-<h3>Upcoming Events</h3>
-<ul>
-	<% @events.upcoming.each do |event| %>
-		<li>
-			<strong>Title:</strong> <%= link_to event.title, event %><br/>
-			<strong>Location:</strong> <%= event.location %><br/>
-			<strong>Creator:</strong>  <%= link_to event.creator.full_name, event.creator if event.creator %>
-		</li><br/>
-	<% end %>
+<h2>Events</h2>
+<ul class="nav nav-tabs">
+  <li class="active">
+  	<a data-toggle="tab" href="#upcoming">
+  		<h4>
+  			<%= "Upcoming#{@events.upcoming.count if @events.upcoming.any?}"%>
+			</h4>
+		</a>
+	</li>
+  <li>
+  	<a data-toggle="tab" href="#past">
+  		<h4>
+  			Past
+			</h4>
+		</a>
+	</li>
 </ul>
-<br/>
 
-<h3>Past Events</h3>
-<ul>
-	<% @events.past.each do |event| %>
-		<li>
-			<strong>Title:</strong> <%= link_to event.title, event %><br/>
-			<strong>Location:</strong> <%= event.location %><br/>
-			<strong>Creator:</strong>  <%= link_to event.creator.full_name, event.creator if event.creator %>
-		</li><br/>
-	<% end %>
-</ul>
+<div class="tab-content">
+  <div id="upcoming" class="tab-pane fade in active">
+    <table class="table table-striped">
+    	<thead>
+    		<tr>
+    			<th>Title</th>
+    			<th>Location</th>
+    			<th>Host</th>
+    			<th>Date & Time</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<% @events.upcoming.each do |event| %>
+	    		<tr>
+	    			<td><%= link_to event.title %></td>
+	    			<td><%= event.location %></td>
+	    			<td><%= link_to event.creator.full_name, event.creator %></td>
+	    			<td><%= event.datetime.localtime.strftime('%m/%d/%Y, %l:%M %p') %></td>
+	    		</tr>
+    		<% end %>
+    	</tbody>
+    </table>
+    
+  </div>
+  <div id="past" class="tab-pane fade">
+    <table class="table table-striped">
+    	<thead>
+    		<tr>
+    			<th>Title</th>
+    			<th>Location</th>
+    			<th>Host</th>
+    			<th>Date & Time</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<% @events.past.each do |event| %>
+	    		<tr>
+	    			<td><%= link_to event.title %></td>
+	    			<td><%= event.location %></td>
+	    			<td><%= link_to event.creator.full_name, event.creator %></td>
+	    			<td><%= event.datetime.localtime.strftime('%m/%d/%Y, %l:%M %p') %></td>
+	    		</tr>
+    		<% end %>
+    	</tbody>
+    </table>
+  </div>
+
+</div>
+

@@ -12,10 +12,10 @@
     		<tr>
     			<th>From</th>
     			<th>Event</th>
-    			<th>Host</th>
     			<th>Date & Time</th>
     			<th>Status</th>
     			<th>Actions</th>
+    			<th>View</th>
     		</tr>
     	</thead>
     	<tbody>
@@ -23,11 +23,11 @@
     		<tr>
     			<td><%= link_to rec_invite.inviter.full_name, rec_invite.inviter %></td>
     			<td><%= link_to rec_invite.event.title, rec_invite.event %></td>
-    			<td><%= link_to rec_invite.event.creator.full_name, rec_invite.event.creator %></td>
     			<td><%= rec_invite.event.datetime.localtime.strftime('%m/%d/%Y, %l:%M %p') %></td>
     			<td><%= rec_invite.status %>
     			<td><%= link_to "Accept", accept_invite_path(rec_invite), method: :put %> | 
   						<%= link_to "Decline", decline_invite_path(rec_invite), method: :put %> </td>
+					<td><%= link_to "Details", rec_invite %> </td>
     		</tr>
     		<% end %>
     	</tbody>
@@ -36,7 +36,28 @@
   </div>
   <div id="sent" class="tab-pane fade">
     <h3>Sent</h3>
-    
+    <table class="table table-striped">
+    	<thead>
+    		<tr>
+    			<th>To</th>
+    			<th>Event</th>
+    			<th>Date & Time</th>
+    			<th>Status</th>
+    			<th>View</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<% @sent_invitations.each do |sent_invite| %>
+    		<tr>
+    			<td><%= link_to sent_invite.invitee.full_name, sent_invite.invitee %></td>
+    			<td><%= link_to sent_invite.event.title, sent_invite.event %></td>
+    			<td><%= sent_invite.event.datetime.localtime.strftime('%m/%d/%Y, %l:%M %p') %></td>
+    			<td><%= sent_invite.status %>
+					<td><%= link_to "Details", sent_invite %> </td>
+    		</tr>
+    		<% end %>
+    	</tbody>
+    </table>
   </div>
 
 </div>

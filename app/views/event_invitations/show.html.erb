@@ -1,0 +1,14 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">Invitation Details</div>
+	<div class="panel-body">
+		<p><strong>Title:</strong> <%= @invitation.event.title %></p>
+		<p><strong>From:</strong> <%= link_to @invitation.inviter.full_name, @invitation.inviter %></p>
+		<p><strong>Event Time:</strong> <%= @invitation.event.datetime.localtime.strftime('%m/%d/%Y, %l:%M %p') %></p>
+		<p><strong>Location:</strong> <%= @invitation.event.location %></p>
+		<p><strong>Status:</strong> <%= @invitation.status %></p>
+		<p><%= link_to "Accept", accept_invite_path(@invitation), 
+					 method: :put, class: "btn btn-#{@invitation.attending ? 'primary' : 'default'}" %>
+			 <%= link_to "Decline", decline_invite_path(@invitation), 
+					 method: :put, class: "btn btn-#{@invitation.attending ? 'default' : 'primary'}" %></p>
+	 </div>
+</div>

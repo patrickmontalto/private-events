@@ -10,6 +10,7 @@ class EventInvitationsController < ApplicationController
   end
 
   def show
+    @action = params[:action]
     @invitation = EventInvitation.find(params[:id])
   end
 
@@ -40,7 +41,11 @@ class EventInvitationsController < ApplicationController
   def accept
     @invite = EventInvitation.find(params[:id])
     @invite.update_attributes(attending: true)
-    redirect_to invites_path
+    if @action == 'show' 
+      redirect_to @invite 
+    else
+      redirect_to invites_path
+    end
   end
 
   def decline
