@@ -3,7 +3,7 @@
   <li class="active">
   	<a data-toggle="tab" href="#upcoming">
   		<h4>
-  			<%= "Upcoming#{@events.upcoming.count if @events.upcoming.any?}"%>
+  			<%= @events.upcoming.any? ? "Upcoming(#{@events.upcoming.count})" : "Upcoming" %>
 			</h4>
 		</a>
 	</li>

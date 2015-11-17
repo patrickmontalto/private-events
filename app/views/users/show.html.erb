@@ -1,14 +1,25 @@
-<h2>User</h2>
-<p>	
-	<strong>Name:</strong><%= @user.full_name %>
-</p>
-<p>
-	<strong>Email:</strong><%= @user.email %>
-</p>
-
-<h3>Hosted Events:</h3>
-<ul>
-	<% @user.hosted_events.each do |event| %>
-		<li><%= event.title %> at <%= event.location %>.</li>
-	<% end %>
-</ul>
+<div class="row">
+	<div class="col-md-12">
+		<div class="panel panel-info">
+			<div class="panel-heading">User Info</div>
+			<div class="panel-body">
+				<div class="col-md-3" id="user-picture"><%= image_tag("Dog_At_Computer.jpg", height: 200, width: 200)  %></div>
+				<div class="col-md-9" id="user-info">
+					<p>
+						<h4><%= @user.full_name %></h4>
+						<%= @user.email %>
+					</p>
+				</div>
+				<div class="col-md-12">
+					<h3>Events Hosted:</h3>
+					<hr>
+					<ul>
+						<% @user.hosted_events.each do |event| %>
+							<li><%= event.title %> at <%= event.location %>.</li>
+						<% end %>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

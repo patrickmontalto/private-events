@@ -10,27 +10,35 @@
 </div>
 <div class="row">
 	<div class="col-xs-6">
-	<strong>Upcoming Events</strong>
-		<% if current_user.upcoming_events.any? %>
-			<ul>
-				<% current_user.upcoming_events.each do |event| %>
-					<li><%= link_to "#{event.title} - #{event.datetime.strftime('%m/%d/%Y')}", event %></li>
+		<div class="panel panel-info">
+			<div class="panel panel-heading">Upcoming Events</div>
+			<div class="panel panel-body" style="margin-bottom: 0px">
+				<% if current_user.upcoming_events.any? %>
+					<ul>
+						<% current_user.upcoming_events.each do |event| %>
+							<li><%= link_to "#{event.title} - #{event.datetime.strftime('%m/%d/%Y')}", event %></li>
+						<% end %>
+					</ul>
+				<% else %>
+					<p>No upcoming events!</p>
 				<% end %>
-			</ul>
-		<% else %>
-			<p>No upcoming events!</p>
-		<% end %>
+			</div>
+		</div>
 	</div>
 	<div class="col-xs-6">
-	<strong>Past Events</strong>
-		<% if current_user.previous_events.any? %>
-			<ul>
-				<% current_user.previous_events.each do |event| %>
-					<li><%= link_to "#{event.title} - #{event.datetime.strftime('%m/%d/%Y')}", event %></li>
+		<div class="panel panel-info">
+			<div class="panel panel-heading">Past Events</div>
+			<div class="panel panel-body" style="margin-bottom: 0px">
+				<% if current_user.previous_events.any? %>
+					<ul>
+						<% current_user.previous_events.each do |event| %>
+							<li><%= link_to "#{event.title} - #{event.datetime.strftime('%m/%d/%Y')}", event %></li>
+						<% end %>
+					</ul>
+				<% else %>
+					<p>You have no past events.</p>
 				<% end %>
-			</ul>
-		<% else %>
-			<p>You have no past events.</p>
-		<% end %>
+			</div>
+		</div>
 	</div>
 </div>
